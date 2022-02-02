@@ -31,6 +31,22 @@ class List_Users_Deactivator {
 	 */
 	public static function deactivate() {
 
+		$slug = 'list-users-page';
+		$title = 'List Users Page';
+		
+		// check if our page exists and if so, delete it
+		if ( get_page_by_path( $slug ) != null ) {
+
+			$list_users_page = get_page_by_path( $slug );
+			$post_id = $list_users_page->ID;
+			$deleted_post = wp_delete_post( $post_id, true );
+
+			if ( !$deleted_post ) {
+				wp_die( 'There was an issue deleting the post.' );
+			}
+			
+		}
+
 	}
 
 }
